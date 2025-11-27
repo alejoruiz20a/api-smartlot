@@ -24,7 +24,7 @@ class Config:
     DB_NAME     = os.getenv('DB_NAME')
 
     SQLALCHEMY_DATABASE_URI = (
-        f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+        f"postgresql://postgres:postgres@127.0.0.1:5432/smartlot"
     )
     
     SQLALCHEMY_TRACK_MODIFICATIONS = False

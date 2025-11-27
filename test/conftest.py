@@ -8,7 +8,6 @@ def app():
     app = create_app('testing')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     app.config['TESTING'] = True
-
     with app.app_context():
         db.create_all()
         yield app
@@ -21,7 +20,7 @@ def client(app):
 
 @pytest.fixture
 def user_token(app):
-    user = User(username='testuser', email='test@example.com')
+    user = User(full_name='Test User', email='test@example.com')
     user.set_password('1234')
     db.session.add(user)
     db.session.commit()

@@ -36,12 +36,12 @@ class PaymentMethod(enum.Enum):
 class User(db.Model):
     __tablename__ = 'users'
     
-    id = db.Column(db.BigInteger, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(200), nullable=False)
-    email = db.Column(db.String(150), unique=True)
-    password_hash = db.Column(db.String(512))
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password_hash = db.Column(db.Text, nullable=False)
     enabled = db.Column(db.Boolean, default=True)
-    created_at = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
+    created_at = db.Column(db.DateTime(timezone=True), server_default=db.func.now())
     
     user_roles = db.relationship('UserRole', back_populates='user', cascade='all, delete-orphan')
     

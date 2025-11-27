@@ -19,7 +19,8 @@ def register():
 @users_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    user = User.query.filter_by(username=data.get('username')).first()
+    # CAMBIO: username → email
+    user = User.query.filter_by(email=data.get('email')).first()
     if not user or not user.check_password(data.get('password')):
         return jsonify({'msg': 'Credenciales incorrectas'}), 401
     access_token = create_access_token(identity=str(user.id))
